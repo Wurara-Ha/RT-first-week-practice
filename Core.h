@@ -65,6 +65,12 @@ inline FLOAT_TYPE Clamp(FLOAT_TYPE x, FLOAT_TYPE Min, FLOAT_TYPE Max)
 	return x;
 }
 
+inline int RandInt(int Min, int Max)
+{
+	// Return a random interger in [Min, Max]
+	return static_cast<int>(RandomFloat(Min, Max + 0.99999));
+}
+
 // Common Headers
 
 #include "Ray.h"

@@ -1,4 +1,5 @@
 #include "Core.h"
+#include "BVH.h"
 #include "HittableList.h"
 #include "Sphere.h"
 #include "Camera.h"
@@ -6,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
+#include <chrono>
 
 Color RayColor(const Ray& r, const Hittable& world, int Depth) 
 {
@@ -105,6 +107,14 @@ void RandomScene(HittableList& World)
 
 int main() {
 
+    // Timer
+
+    using namespace std::chrono;
+    FLOAT_TYPE delta_time;
+    steady_clock::time_point TimeStart;
+    steady_clock::time_point TimeEnd;
+    duration<float> TimeSpan;
+
     // Bind cout to file
 
     std::ofstream file("Image.ppm");
@@ -115,6 +125,16 @@ int main() {
     HittableList World;
     //SpecificObject(World);
     RandomScene(World);
+
+    TimeStart = steady_clock::now();
+
+    BvhNode BvhWorld(World);
+
+    TimeEnd = steady_clock::now();
+    TimeSpan = duration_cast<duration<float>>(TimeEnd - TimeStart);
+    delta_time = TimeSpan.count();
+
+    FLOAT_TYPE BvhBuildTime = delta_time;
       
     // Camera
 
@@ -133,10 +153,12 @@ int main() {
     const auto AspectRatio = Cam.GetAspectRatio();
     const int ImageWidth = 1280;
     const int ImageHeight = static_cast<int>(ImageWidth / AspectRatio);
-    const int Spp = 256;
-    const int MaxDepth = 32;
+    const int Spp = 32;
+    const int MaxDepth = 16;
    
     // Render
+
+    TimeStart = steady_clock::now();
 
     std::cout << "P3\n" << ImageWidth << " " << ImageHeight << "\n255\n";
 
@@ -157,6 +179,13 @@ int main() {
         }
     }
 
+    TimeEnd = steady_clock::now();
+    TimeSpan = duration_cast<duration<float>>(TimeEnd - TimeStart);
+    delta_time = TimeSpan.count();
+
+    FLOAT_TYPE RenderTime = delta_time;
+
     std::cerr << "\nDone.\n";
 
+    std::cerr << "BVH Build Time:" << BvhBuildTime << "s, " << "Render Time : " << RenderTime << "s" << std::endl;
 }

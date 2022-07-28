@@ -8,9 +8,15 @@ class Sphere : public Hittable
 {
 public:
 	Sphere() {}
-	Sphere(Point3 Cen, FLOAT_TYPE r, shared_ptr<Material> m) :Center(Cen), Radius(r), MatPtr(m) {}
+	Sphere(Point3 Cen, FLOAT_TYPE r, shared_ptr<Material> m) :Center(Cen), Radius(r), MatPtr(m)
+	{
+		ConstructBBox();
+	}
 
 	virtual bool Hit(const Ray& r, FLOAT_TYPE tMin, FLOAT_TYPE tMax, HitRecord& rec) const override;
+
+	// Here I Store the BBox rather compute it dynamically compare to original book
+	virtual void ConstructBBox() override;
 
 private:
 	Point3 Center;
@@ -47,4 +53,14 @@ bool Sphere::Hit(const Ray& r, FLOAT_TYPE tMin, FLOAT_TYPE tMax, HitRecord& rec)
 	rec.MatPtr = MatPtr;
 
 	return true;
+}
+
+void Sphere::ConstructBBox()
+{
+	if (HasBBox()) return;
+
+	BBox = make_shared<AABB>(
+		Center - Vec3(Radius, Radius, Radius),
+		Center + Vec3(Radius, Radius, Radius)
+		);
 }

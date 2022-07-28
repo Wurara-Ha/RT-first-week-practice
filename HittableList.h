@@ -16,8 +16,10 @@ public:
 
 	void Clear() { Objects.clear(); }
 	void Add(shared_ptr<Hittable> Object) { Objects.push_back(Object); }
+	std::vector<shared_ptr<Hittable>>& GetObjects() { return Objects; }
 
 	virtual bool Hit(const Ray& r, FLOAT_TYPE tMin, FLOAT_TYPE tMax, HitRecord& rec) const override;
+	virtual void ConstructBBox() override {}
 
 private:
 	std::vector<shared_ptr<Hittable>> Objects;
@@ -30,6 +32,7 @@ bool HittableList::Hit(const Ray& r, FLOAT_TYPE tMin, FLOAT_TYPE tMax, HitRecord
 	bool HitAnything = false;
 	auto ClosestSoFar = tMax;
 
+	// Intuitive hit implementation
 	for (const auto& Object : Objects)
 	{
 		if (Object->Hit(r, tMin, ClosestSoFar, TempRec))
@@ -39,5 +42,9 @@ bool HittableList::Hit(const Ray& r, FLOAT_TYPE tMin, FLOAT_TYPE tMax, HitRecord
 			rec = TempRec;
 		}
 	}
+
+	// Bvh hit implementation
+
+
 	return HitAnything;
 }
