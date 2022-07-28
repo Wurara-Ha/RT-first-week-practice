@@ -1,8 +1,8 @@
-#include "Core.h"
-#include "BVH.h"
-#include "HittableList.h"
-#include "Sphere.h"
-#include "Camera.h"
+#include "Header/Core.h"
+#include "Header/BVH.h"
+#include "Header/HittableList.h"
+#include "Header/Sphere.h"
+#include "Header/Camera.h"
 
 #include <cmath>
 #include <iostream>
@@ -153,8 +153,8 @@ int main() {
     const auto AspectRatio = Cam.GetAspectRatio();
     const int ImageWidth = 1280;
     const int ImageHeight = static_cast<int>(ImageWidth / AspectRatio);
-    const int Spp = 32;
-    const int MaxDepth = 16;
+    const int Spp = 128;
+    const int MaxDepth = 32;
    
     // Render
 
@@ -172,7 +172,7 @@ int main() {
                 auto u = (double(i) + RandomFloat()) / (ImageWidth - 1);
                 auto v = (double(j) + RandomFloat()) / (ImageHeight - 1);
                 Ray r = Cam.GetRay(u, v);
-                PixelColor += RayColor(r, World, MaxDepth);
+                PixelColor += RayColor(r, BvhWorld, MaxDepth);
             }
             WriteColor(std::cout, PixelColor, Spp);
 
