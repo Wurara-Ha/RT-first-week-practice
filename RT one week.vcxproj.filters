@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\Header">
+      <UniqueIdentifier>{47659368-8466-48e7-8b38-3e3f7e09bba6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -20,38 +23,38 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Vec.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Ray.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Hittable.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Header</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Header</Filter>
     </ClInclude>
-    <ClInclude Include="HittableList.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Ray.h">
+      <Filter>头文件\Header</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Header</Filter>
     </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>头文件</Filter>
+    <ClInclude Include="Hittable.h">
+      <Filter>头文件\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="HittableList.h">
+      <Filter>头文件\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>头文件\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>头文件\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>头文件\Header</Filter>
     </ClInclude>
     <ClInclude Include="BVH.h">
-      <Filter>头文件</Filter>
+      <Filter>头文件\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>头文件\Header</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
